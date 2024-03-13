@@ -1,0 +1,8 @@
+{
+  "dependencies": [
+    "minhook",
+    "fmt",
+    "nlohmann-json",
+    "imgui"
+  ]
+}

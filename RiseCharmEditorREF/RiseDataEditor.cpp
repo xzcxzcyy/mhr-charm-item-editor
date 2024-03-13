@@ -1011,6 +1011,10 @@ void RiseDataEditor::export_charms(const std::string& to, const std::vector<Char
 void RiseDataEditor::export_items(const std::string& to, API::ManagedObject* itembox) const {
     nlohmann::json j = nlohmann::json::array();
     const auto count = utility::call<uint32_t>(itembox, "get_Count");
+    auto get_itemname = [this](uint32_t id) {
+        const auto str = utility::call<SystemString*>(m_get_item_name, id);
+        return utility::narrow(str->data);
+    };
 
     for (auto i = 0u; i < count; ++i) {
         const auto item = utility::call(itembox, "get_Item", i);
@@ -1018,8 +1022,9 @@ void RiseDataEditor::export_items(const std::string& to, API::ManagedObject* ite
 
         const auto id = *data->get_field<uint32_t>("_Id");
         const auto amt = *data->get_field<int32_t>("_Num");
+        const auto name = get_itemname(id);
 
-        j.push_back({{"id", id}, {"amount", amt}});
+        j.push_back({{"id", id}, {"amount", amt}, {"name", name.c_str()}});
     }
 
     std::ofstream(to) << j.dump();

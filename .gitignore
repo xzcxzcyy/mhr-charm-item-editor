@@ -369,3 +369,5 @@ FodyWeavers.xsd
 /RiseCharmEditorREF/dependencies/rapidfuzz-cpp-1.0.1/cmake
 /RiseCharmEditorREF/dependencies/rapidfuzz-cpp-1.0.1
 /RiseCharmEditorREF/cpp.hint
+
+vcpkg_installed/
